@@ -1,0 +1,92 @@
+# parent class definition
+
+class BasePasswordManager:
+    
+    # list to store all the old passwords
+    old_passwords = []
+    
+    # function definition to get current password
+    def get_password(self) :
+        return old_passwords[-1]
+    
+    # function definition to check if user input string is equal to current password or not
+    def  is_correct(self,str):
+        if str == old_passwords[-1]:
+            return True
+        else:
+            return False
+
+# child class that inherits parent class BasePasswordManager
+class PasswordManager(BasePasswordManager):
+    
+    # function definition to set new password
+    def set_password(self):
+        
+        # user input new password
+        new_password = input("Enter new password : ")
+        
+        # get the security level of new_password by calling get_level function 
+        # where new_password is passed as argument
+        output = obj.get_level(new_password)
+        
+        # condition to check if new_password match the set password criteria
+        if len(new_password)>=6 and output >= result:
+            
+            # if satifies -
+            # update current password with new password
+            curr_password = new_password
+            print("Password set successfully !")
+            
+            # add the new password in the old_passwords list
+            old_passwords.append(new_password)
+            print("New Current Password : " + curr_password)
+            print("Security Level of new current password is Level " + str(output))
+            
+        # if password set criteria does not match -
+        else :
+            print("Password set criteria doesnot matched !")
+            
+    # function definition to get the security level of password
+    def get_level(self, str1):
+        
+        # condition to check if password is created using either alphabets or numbers
+        if str1.isalpha() or str1.isdecimal() :
+            level = 0
+            
+        # alternate condition to check if password is created using alphanumeric string
+        elif str1.isalnum() :
+            level = 1
+            
+        # if none of above conditions satisfies -
+        # means the password is created using alphanumeric and special character string
+        else :
+            level = 2
+        return level
+    
+# main statements for execution
+# creating object of child class
+obj = PasswordManager()
+
+# user input a string
+str0 = input("Enter the current password : ")
+
+# initialize old_passwords list with some values
+old_passwords = ['ritik@12', 'rit123']
+
+# function call to is_correct
+print(obj.is_correct(str0))
+
+# function call to get_level to return security level of current password
+result = obj.get_level(old_passwords[-1])
+print("Security Level of current password is Level " + str(result))
+
+# menu to ask user for password change
+print("\nDo you want to change your current password ? ")
+s = input("Enter yes or no : ")
+
+# if user wants to change pasword
+if s == 'yes' :
+    
+    # function call to set new password
+    obj.set_password()
+
